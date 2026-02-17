@@ -1,7 +1,7 @@
 # Base for builder
 FROM debian:stable-slim AS builder
 # Deps for builder
-RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates ldc git clang dub libz-dev libssl-dev \
+RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates ldc git clang dub libz-dev libssl-dev libplist-dev libplist-2.0-4 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -12,7 +12,7 @@ RUN DC=ldc2 dub build -c "static" --build-mode allAtOnce -b release --compiler=l
 
 # Base for run
 FROM debian:stable-slim
-RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl \
+RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl libplist-dev libplist-2.0-4\
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
